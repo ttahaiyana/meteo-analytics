@@ -6,7 +6,6 @@ import Trends from './tabs/Trends.jsx'
 import Extremes from './tabs/Extremes.jsx'
 import Correlations from './tabs/Correlations.jsx'
 import Insights from './tabs/Insights.jsx'
-import Quality from './tabs/Quality.jsx'
 
 const TABS = [
   ['season', 'Режим и сезонность', Seasonality, true],
@@ -15,7 +14,6 @@ const TABS = [
   ['extremes', 'Экстремумы', Extremes, true],
   ['corr', 'Связи параметров', Correlations, true],
   ['insights', 'Прикладные выводы', Insights, false],
-  ['quality', 'Качество данных', Quality, false],
 ]
 
 export default function App() {
