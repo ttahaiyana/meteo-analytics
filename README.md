@@ -8,13 +8,19 @@
 - **R** (`analysis/`) — вся статистика. Go запускает `Rscript analysis/run.R <метод>`, передаёт JSON через stdin, читает JSON из stdout.
 - **React + Vite + Plotly** (`frontend/`) — дашборды (7 вкладок).
 
-## Запуск
+## Быстрый старт (данные уже в репозитории)
+Нужны Go, R и Node.js.
 ```
+git clone https://github.com/ttahaiyana/meteo-analytics && cd meteo-analytics
 make install   # jsonlite + npm install
-make test
-make run       # http://localhost:8080
+make demo      # сборка, запуск, прогрев кэша, открытие http://localhost:8080
 ```
-Затем в интерфейсе нажмите «Загрузить данные». Бесплатный API Open-Meteo ограничивает число запросов: при ошибке 429 подождите и нажмите «Догрузить недостающие».
+Остановить сервер: `make stop`. Остальные команды: `make help`.
+
+Готовые ряды 10 точек за 1950–2024 лежат в `data/raw/`, загружать ничего не нужно.
+
+## Обновление данных
+`make fetch` перекачивает все точки, `make fetch-missing` — только недостающие. Бесплатный API Open-Meteo ограничивает число запросов: при ошибке 429 подождите и выполните `make fetch-missing`.
 Для разработки фронтенда: `cd frontend && npm run dev` (прокси на :8080).
 
 ## Методика
@@ -27,3 +33,6 @@ make run       # http://localhost:8080
 
 ## Ограничения
 ERA5 — реанализ, а не наблюдения станций; сетка ~25 км сглаживает локальные экстремумы. Скорость ветра — суточный максимум на 10 м. Тренды по отдельной точке не равны глобальному тренду.
+
+## Данные и лицензия
+Данные: [Open-Meteo](https://open-meteo.com/) Historical Weather API (реанализ ERA5, Copernicus Climate Change Service / ECMWF), лицензия CC BY 4.0. Для некоммерческого использования.
