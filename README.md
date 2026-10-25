@@ -6,7 +6,7 @@
 ## Архитектура
 - **Go** (`backend/`) — HTTP API, загрузка из Open-Meteo (проверка структуры ответа, ретраи при 429/5xx), хранение сырых CSV в `data/raw/`, запуск R, кэш результатов, раздача фронтенда.
 - **R** (`analysis/`) — вся статистика. Go запускает `Rscript analysis/run.R <метод>`, передаёт JSON через stdin, читает JSON из stdout.
-- **React + Vite + Plotly** (`frontend/`) — дашборды (7 вкладок).
+- **React + Vite + Plotly** (`frontend/`) — дашборды (6 вкладок).
 
 ## Быстрый старт (данные уже в репозитории)
 Нужны Go, R и Node.js.
