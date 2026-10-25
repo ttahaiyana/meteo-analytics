@@ -64,7 +64,6 @@ export default function App() {
     <>
       <header>
         <h1>Аналитика погоды · Open-Meteo (ERA5)</h1>
-        <span className="sub">{loaded.length} из {locs.length} точек загружено</span>
         <span className="spacer" />
         {job?.running && (
           <>
@@ -72,9 +71,9 @@ export default function App() {
             <span className="sub">загрузка {job.done}/{job.total}</span>
           </>
         )}
-        <button className="btn" onClick={load} disabled={job?.running || loaded.length === locs.length}>
-          {loaded.length === 0 ? 'Загрузить данные' : 'Догрузить недостающие'}
-        </button>
+        {loaded.length === 0 && (
+          <button className="btn" onClick={load} disabled={job?.running}>Загрузить данные</button>
+        )}
       </header>
       <nav>
         {TABS.map(([id, label]) => (
@@ -86,7 +85,7 @@ export default function App() {
         {errs.length > 0 && (
           <div className="error" style={{ marginBottom: 12 }}>
             Не загружено: {errs.map(([id, m]) => `${locs.find((l) => l.id === id)?.name || id} (${m})`).join('; ')}.
-            Бесплатный API ограничивает число запросов — повторите позже кнопкой «Догрузить».
+            Бесплатный API ограничивает число запросов — повторите позже командой make fetch-missing.
           </div>
         )}
         {loaded.length === 0 ? (

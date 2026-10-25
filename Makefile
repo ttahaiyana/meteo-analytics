@@ -29,6 +29,7 @@ run: build ## собрать и запустить сервер на перед�
 
 start: build ## собрать и запустить сервер в фоне (лог: bin/server.log)
 	@$(MAKE) --no-print-directory stop
+	@if ss -ltn | grep -q ':$(PORT) '; then echo "Порт $(PORT) занят другим процессом: освободите его или задайте ADDR=:9000"; exit 1; fi
 	@nohup ./bin/server -root . -addr $(ADDR) > $(LOGFILE) 2>&1 & echo $$! > $(PIDFILE)
 	@echo "Сервер запущен: http://localhost:$(PORT)  (PID $$(cat $(PIDFILE)))"
 
